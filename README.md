@@ -22,7 +22,7 @@ SELECT name
 FROM Customer
 WHERE referee_id != 2 OR referee_id IS NULL;
 ```
- ##[595 - Big Countries](https://leetcode.com/problems/big-countries/)
+ ## [595 - Big Countries](https://leetcode.com/problems/big-countries/)
 
  ```sql
 SELECT NAME,POPULATION,AREA FROM  WORLD
