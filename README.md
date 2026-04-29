@@ -22,3 +22,11 @@ SELECT name
 FROM Customer
 WHERE referee_id != 2 OR referee_id IS NULL;
 ```
+ ##[595 - Big Countries](https://leetcode.com/problems/big-countries/)
+
+ ```sql
+SELECT NAME,POPULATION,AREA FROM  WORLD
+WHERE AREA >= 3000000
+OR POPULATION >= 25000000;
+```
+
