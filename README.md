@@ -30,3 +30,11 @@ WHERE AREA >= 3000000
 OR POPULATION >= 25000000;
 ```
 
+## [1148 -  Article Views I](https://leetcode.com/problems/article-views-i/)
+
+```sql
+SELECT DISTINCT AUTHOR_ID AS ID FROM VIEWS
+WHERE AUTHOR_ID = VIEWER_ID
+ORDER BY AUTHOR_ID ASC; 
+```
+
