@@ -38,3 +38,22 @@ WHERE AUTHOR_ID = VIEWER_ID
 ORDER BY AUTHOR_ID ASC; 
 ```
 
+## [1683 - Invalid Tweets](https://leetcode.com/problems/invalid-tweets/)
+```sql
+SELECT TWEET_ID FROM TWEETS
+WHERE LENGTH(CONTENT)>15;
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
