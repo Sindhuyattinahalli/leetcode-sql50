@@ -44,7 +44,13 @@ SELECT TWEET_ID FROM TWEETS
 WHERE LENGTH(CONTENT)>15;
 ```
 
-
+## [1378 - Replace Employee ID With The Unique Identifier](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/)
+```sql
+select unique_id ,name
+from employees  emp
+left join employeeUNI uni
+on uni.id = emp.id;
+```
 
 
 
