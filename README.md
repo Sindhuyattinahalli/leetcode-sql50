@@ -51,7 +51,15 @@ from employees  emp
 left join employeeUNI uni
 on uni.id = emp.id;
 ```
-
+## [1068 - Product Sales Analysis I](https://leetcode.com/problems/product-sales-analysis-i/)
+```sql
+SELECT P.PRODUCT_NAME,
+       S.YEAR,
+       S.PRICE
+       FROM PRODUCT P
+       JOIN SALES S
+       ON P.PRODUCT_ID = S.PRODUCT_ID;
+```
 
 
 
