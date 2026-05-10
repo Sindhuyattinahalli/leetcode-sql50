@@ -60,14 +60,20 @@ SELECT P.PRODUCT_NAME,
        JOIN SALES S
        ON P.PRODUCT_ID = S.PRODUCT_ID;
 ```
-[197 - Rising Temperature](https://leetcode.com/problems/rising-temperature/)
+## [197 - Rising Temperature](https://leetcode.com/problems/rising-temperature/)
 ```sql
 SELECT W1.ID
 FROM WEATHER W1,WEATHER W2
 WHERE W1.RECORDDATE = W2.RECORDDATE+1
 AND W1.TEMPERATURE > W2.TEMPERATURE;
 ```
-
+## [620 - Not Boring Movies](https://leetcode.com/problems/not-boring-movies/)
+```sql
+SELECT * FROM CINEMA
+WHERE MOD(ID,2) = 1  AND
+DESCRIPTION !=  'boring'
+ORDER BY RATING DESC;
+```
 
 
 
