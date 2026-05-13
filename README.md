@@ -81,6 +81,18 @@ FROM EMPLOYEE E LEFT JOIN BONUS B
 ON E.EMPID = B.EMPID 
 WHERE B.BONUS<1000 OR  B.BONUS IS NULL;
 ```
+## [1729 - Find Followers Count](https://leetcode.com/problems/find-followers-count/)
+```sql
+SELECT USER_ID,
+COUNT(FOLLOWER_ID) AS FOLLOWERS_COUNT
+FROM FOLLOWERS
+GROUP BY USER_ID
+ORDER BY USER_ID ASC;
+```
+
+
+
+
 
 
 
