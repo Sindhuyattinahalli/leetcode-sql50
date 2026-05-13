@@ -74,7 +74,13 @@ WHERE MOD(ID,2) = 1  AND
 DESCRIPTION !=  'boring'
 ORDER BY RATING DESC;
 ```
-
+## [577 - Employee Bonus](https://leetcode.com/problems/employee-bonus/)
+```sql
+SELECT E.NAME , B.BONUS
+FROM EMPLOYEE E LEFT JOIN BONUS B
+ON E.EMPID = B.EMPID 
+WHERE B.BONUS<1000 OR  B.BONUS IS NULL;
+```
 
 
 
