@@ -89,7 +89,16 @@ FROM FOLLOWERS
 GROUP BY USER_ID
 ORDER BY USER_ID ASC;
 ```
-
+## [1581 - Customer who Visited but Did Not Make Any Transactions](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/)
+```sql
+SELECT v.customer_id,
+       COUNT(v.visit_id) AS count_no_trans
+FROM Visits v
+LEFT JOIN Transactions t
+ON v.visit_id = t.visit_id
+WHERE t.transaction_id IS NULL
+GROUP BY v.customer_id;
+```
 
 
 
