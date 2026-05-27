@@ -125,6 +125,21 @@ WHERE id IN (
 );
 ```
 
+## [1484-Group-Sold-Products-By-The-Date](https://leetcode.com/problems/group-sold-products-by-the-date/)
+```sql
+SELECT TO_CHAR(SELL_DATE,'YYYY-MM-DD') AS SELL_DATE,
+       COUNT(PRODUCT) AS NUM_SOLD,
+       LISTAGG(PRODUCT, ',')
+       WITHIN GROUP (ORDER BY PRODUCT) AS PRODUCTS
+FROM
+(
+    SELECT DISTINCT SELL_DATE, PRODUCT
+    FROM ACTIVITIES
+)
+GROUP BY SELL_DATE
+ORDER BY SELL_DATE;
+```
+
 
 
 
