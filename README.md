@@ -147,6 +147,26 @@ ON P.EMPLOYEE_ID = E.EMPLOYEE_ID
 GROUP BY PROJECT_ID
 ORDER BY PROJECT_ID;
 ```
+## [1280-Students and Examinations](https://leetcode.com/problems/students-and-examinations/)
+```sql
+SELECT
+    s.student_id,
+    s.student_name,
+    sub.subject_name,
+    COUNT(e.subject_name) AS attended_exams
+FROM Students s
+CROSS JOIN Subjects sub
+LEFT JOIN Examinations e
+    ON s.student_id = e.student_id
+   AND sub.subject_name = e.subject_name
+GROUP BY
+    s.student_id,
+    s.student_name,
+    sub.subject_name
+ORDER BY
+    s.student_id,
+    sub.subject_name;
+```
 
 
 
