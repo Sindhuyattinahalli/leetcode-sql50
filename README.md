@@ -271,7 +271,7 @@ WHERE (customer_id, order_date) IN (
 );
 
 ```
-##[550-Game Play Analysis IV](https://leetcode.com/problems/game-play-analysis-iv/)
+## [550-Game Play Analysis IV](https://leetcode.com/problems/game-play-analysis-iv/)
 ```sql
 WITH first_login AS (
     SELECT
