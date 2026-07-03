@@ -249,6 +249,55 @@ ORDER BY
 
 ```
 
+## [1174-Immediate Food Delivery II](https://leetcode.com/problems/immediate-food-delivery-ii/)
+```sql
+SELECT
+    ROUND(
+        SUM(
+            CASE
+                WHEN order_date = customer_pref_delivery_date THEN 1
+                ELSE 0
+            END
+        ) * 100 / COUNT(*),
+        2
+    ) AS immediate_percentage
+FROM Delivery
+WHERE (customer_id, order_date) IN (
+    SELECT
+        customer_id,
+        MIN(order_date)
+    FROM Delivery
+    GROUP BY customer_id
+);
+
+```
+##[550-Game Play Analysis IV](https://leetcode.com/problems/game-play-analysis-iv/)
+```sql
+WITH first_login AS (
+    SELECT
+        player_id,
+        MIN(event_date) AS first_date
+    FROM Activity
+    GROUP BY player_id
+)
+SELECT
+    ROUND(
+        AVG(
+            CASE
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM Activity a
+                    WHERE a.player_id = f.player_id
+                      AND a.event_date = f.first_date + 1
+                )
+                THEN 1
+                ELSE 0
+            END
+        ),
+        2
+    ) AS fraction
+FROM first_login f;
+```
 
 
 
