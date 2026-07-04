@@ -346,6 +346,30 @@ HAVING COUNT(student) >= 5;
 
 ```
 
+## [619-Biggest Single Number](https://leetcode.com/problems/biggest-single-number/)
+```sql
+SELECT
+    MAX(num) AS num
+FROM MyNumbers
+WHERE num IN (
+    SELECT num
+    FROM MyNumbers
+    GROUP BY num
+    HAVING COUNT(*) = 1
+);
+```
+
+## [1045- Customers Who Bought All Products](https://leetcode.com/problems/customers-who-bought-all-products/)
+```sql
+SELECT
+    customer_id
+FROM Customer
+GROUP BY customer_id
+HAVING COUNT(DISTINCT product_key) = (
+    SELECT COUNT(*)
+    FROM Product
+);
+```
 
 
 
