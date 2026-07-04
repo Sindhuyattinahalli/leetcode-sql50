@@ -300,6 +300,52 @@ FROM first_login f;
 ```
 
 
+## [2356-Number of Unique Subjects Taught By Each Teacher](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/)
+```sql
+SELECT
+    teacher_id,
+    COUNT(DISTINCT subject_id) AS cnt
+FROM Teacher
+GROUP BY teacher_id;
+```
+
+## [1141-User Activity for the Past 30 Days I](https://leetcode.com/problems/user-activity-for-the-past-30-days-i/)
+```sql
+SELECT
+    TO_CHAR(activity_date, 'YYYY-MM-DD') AS day,
+    COUNT(DISTINCT user_id) AS active_users
+FROM Activity
+WHERE activity_date BETWEEN DATE '2019-06-28' AND DATE '2019-07-27'
+GROUP BY activity_date
+ORDER BY activity_date;
+
+```
+
+## [1070- Product Sales Analysis III](https://leetcode.com/problems/product-sales-analysis-iii/)
+```sql
+/* Write your PL/SQL query statement below */
+SELECT
+    product_id,
+    year AS first_year,
+    quantity,
+    price
+FROM Sales s
+WHERE year = (
+    SELECT MIN(year)
+    FROM Sales
+    WHERE product_id = s.product_id
+);
+```
+## [596-Classes With at Least 5 Students](https://leetcode.com/problems/classes-with-at-least-5-students/)
+```sql
+SELECT
+    class
+FROM Courses
+GROUP BY class
+HAVING COUNT(student) >= 5;
+
+```
+
 
 
 
