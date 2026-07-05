@@ -371,6 +371,89 @@ HAVING COUNT(DISTINCT product_key) = (
 );
 ```
 
+## [1731-The Number Of Employees Which Report to Each Employee](https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/)
+```sql
+ELECT
+    e1.employee_id,
+    e1.name,
+    COUNT(e2.employee_id) AS reports_count,
+    ROUND(AVG(e2.age), 0) AS average_age
+FROM Employees e1
+JOIN Employees e2
+ON e1.employee_id = e2.reports_to
+GROUP BY e1.employee_id, e1.name
+ORDER BY e1.employee_id;
+
+```
+
+## [ 1789 - Primary Department For Each Employee](https://leetcode.com/problems/primary-department-for-each-employee/)
+```sql
+SELECT employee_id, department_id
+FROM Employee
+WHERE primary_flag = 'Y'
+
+UNION
+
+SELECT employee_id, MAX(department_id) AS department_id
+FROM Employee
+GROUP BY employee_id
+HAVING COUNT(*) = 1;
+
+```
+
+## [619-Triangle Judgement](https://leetcode.com/problems/triangle-judgement/)
+```sql
+SELECT
+    x,
+    y,
+    z,
+    CASE
+        WHEN x + y > z
+         AND y + z > x
+         AND x + z > y
+        THEN 'Yes'
+        ELSE 'No'
+    END AS triangle
+FROM Triangle;
+
+```
+## [180-Consecutive Numbers](https://leetcode.com/problems/consecutive-numbers/)
+```sql
+SELECT DISTINCT l1.num AS ConsecutiveNums
+FROM Logs l1
+JOIN Logs l2
+ON l1.id = l2.id - 1
+JOIN Logs l3
+ON l2.id = l3.id - 1
+WHERE l1.num = l2.num
+AND l2.num = l3.num;
+```
+## [1164-Product Price at a Given Date](https://leetcode.com/problems/product-price-at-a-given-date/)
+```sql
+SELECT p.product_id,
+       NVL(t.new_price, 10) AS price
+FROM (SELECT DISTINCT product_id FROM Products) p
+LEFT JOIN (
+    SELECT product_id, new_price
+    FROM (
+        SELECT product_id,
+               new_price,
+               change_date,
+               ROW_NUMBER() OVER (
+                   PARTITION BY product_id
+                   ORDER BY change_date DESC
+               ) AS rn
+        FROM Products
+        WHERE change_date <= DATE '2019-08-16'
+    )
+    WHERE rn = 1
+) t
+ON p.product_id = t.product_id;
+```
+
+
+
+
 
 
 
