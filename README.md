@@ -451,12 +451,62 @@ LEFT JOIN (
 ON p.product_id = t.product_id;
 ```
 
+## [1204- Last Person to Fit In The Bus](https://leetcode.com/problems/last-person-to-fit-in-the-bus/)
+```sql
+SELECT person_name
+FROM (
+    SELECT person_name,
+           turn,
+           SUM(weight) OVER (ORDER BY turn) AS total_weight
+    FROM Queue
+)
+WHERE total_weight <= 1000
+AND turn = (
+    SELECT MAX(turn)
+    FROM (
+        SELECT turn,
+               SUM(weight) OVER (ORDER BY turn) AS total_weight
+        FROM Queue
+    )
+    WHERE total_weight <= 1000
+);
+```
 
+## [1907-Count Salary Category](https://leetcode.com/problems/count-salary-categories/)
 
+```sql
+SELECT 'Low Salary' AS category,
+       COUNT(*) AS accounts_count
+FROM Accounts
+WHERE income < 20000
 
+UNION ALL
 
+SELECT 'Average Salary' AS category,
+       COUNT(*) AS accounts_count
+FROM Accounts
+WHERE income BETWEEN 20000 AND 50000
 
+UNION ALL
 
+SELECT 'High Salary' AS category,
+       COUNT(*) AS accounts_count
+FROM Accounts
+WHERE income > 50000;
+```
+## [1978-Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company/)
+
+```sql
+SELECT employee_id
+FROM Employees
+WHERE salary < 30000
+  AND manager_id IS NOT NULL
+  AND manager_id NOT IN (
+      SELECT employee_id
+      FROM Employees
+  )
+ORDER BY employee_id;
+```
 
 
 
