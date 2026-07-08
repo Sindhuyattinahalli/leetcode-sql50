@@ -508,8 +508,70 @@ WHERE salary < 30000
 ORDER BY employee_id;
 ```
 
+## [185-Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries/)
+```sql
+SELECT
+    d.name AS Department,
+    e.name AS Employee,
+    e.salary AS Salary
+FROM (
+    SELECT
+        id,
+        name,
+        salary,
+        departmentId,
+        DENSE_RANK() OVER (
+            PARTITION BY departmentId
+            ORDER BY salary DESC
+        ) AS rnk
+    FROM Employee
+) e
+JOIN Department d
+ON e.departmentId = d.id
+WHERE e.rnk <= 3;
+```
 
+## [585-Investements in 2016](https://leetcode.com/problems/investments-in-2016/)
+```sql
+SELECT  ROUND(SUM(tiv_2016), 2) AS tiv_2016
+FROM Insurance
+WHERE tiv_2015 IN (
+    SELECT tiv_2015
+    FROM Insurance
+    GROUP BY tiv_2015
+    HAVING COUNT(*) > 1
+)
+AND (lat, lon) IN (
+    SELECT lat, lon
+    FROM Insurance
+    GROUP BY lat, lon
+    HAVING COUNT(*) = 1
+);
+```
 
+## [602-Friend Requests II:Who Has The Most Friends](https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/)
+```sql
+WITH friends AS (
+    SELECT requester_id AS id
+    FROM RequestAccepted
+    UNION ALL
+    SELECT accepter_id
+    FROM RequestAccepted
+),
+cnt AS (
+    SELECT
+        id,
+        COUNT(*) AS num,
+        RANK() OVER (ORDER BY COUNT(*) DESC) AS rnk
+    FROM friends
+    GROUP BY id
+)
+SELECT
+    id,
+    num
+FROM cnt
+WHERE rnk = 1;
+```
 
 
 
