@@ -572,9 +572,34 @@ SELECT
 FROM cnt
 WHERE rnk = 1;
 ```
+## [1667-Fix Names in a Table](https://leetcode.com/problems/fix-names-in-a-table/)
+```sql
+SELECT
+    user_id,
+    UPPER(SUBSTR(LOWER(name), 1, 1)) ||
+    SUBSTR(LOWER(name), 2) AS name
+FROM Users
+ORDER BY user_id;
+```
+## [1527-Patients With a Condition](https://leetcode.com/problems/patients-with-a-condition/)
 
-
-
+```sql
+SELECT
+    patient_id,
+    patient_name,
+    conditions
+FROM Patients
+WHERE REGEXP_LIKE(conditions, '(^| )DIAB1');
+```
+## [196-Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails/)
+```sql
+DELETE FROM Person
+WHERE id NOT IN (
+    SELECT MIN(id)
+    FROM Person
+    GROUP BY email
+);
+```
 
 
 
