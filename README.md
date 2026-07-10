@@ -602,4 +602,84 @@ WHERE id NOT IN (
 ```
 
 
+## [1341-Movie Rating](https://leetcode.com/problems/movie-rating/)
+```sql
+SELECT name AS results
+FROM (
+    SELECT u.name
+    FROM MovieRating mr
+    JOIN Users u
+    ON mr.user_id = u.user_id
+    GROUP BY u.user_id, u.name
+    ORDER BY COUNT(*) DESC, u.name
+)
+WHERE ROWNUM = 1
+
+UNION ALL
+
+SELECT title AS results
+FROM (
+    SELECT m.title
+    FROM MovieRating mr
+    JOIN Movies m
+    ON mr.movie_id = m.movie_id
+    WHERE TO_CHAR(mr.created_at, 'YYYY-MM') = '2020-02'
+    GROUP BY m.movie_id, m.title
+    ORDER BY AVG(mr.rating) DESC, m.title
+)
+WHERE ROWNUM = 1;
+```
+## [1378- Replace Employee ID With The Unique Identifier](
+```sql
+/* Write your PL/SQL query statement below */
+SELECT
+    eu.unique_id,
+    e.name
+FROM Employees e
+LEFT JOIN EmployeeUNI eu
+ON e.id = eu.id;
+```
+## [1251-Average Selling Price](https://leetcode.com/problems/average-selling-price/)
+```sql
+SELECT
+    p.product_id,
+    ROUND(
+        NVL(SUM(u.units * p.price) / SUM(u.units), 0),
+        2
+    ) AS average_price
+FROM Prices p
+LEFT JOIN UnitsSold u
+ON p.product_id = u.product_id
+AND u.purchase_date BETWEEN p.start_date AND p.end_date
+GROUP BY p.product_id
+ORDER BY p.product_id;
+```
+## [1371-List the Products Ordered in a Period](https://leetcode.com/problems/list-the-products-ordered-in-a-period/)
+```sql
+SELECT
+    p.product_name,
+    SUM(o.unit) AS unit
+FROM Products p
+JOIN Orders o
+ON p.product_id = o.product_id
+WHERE o.order_date BETWEEN DATE '2020-02-01' AND DATE '2020-02-29'
+GROUP BY p.product_name
+HAVING SUM(o.unit) >= 100;
+```
+## [1517-Find Users With Valid E-Mails](https://leetcode.com/problems/find-users-with-valid-e-mails/)
+```sql
+SELECT
+    user_id,
+    name,
+    mail
+FROM Users
+WHERE REGEXP_LIKE(
+    mail,
+    '^[A-Za-z][A-Za-z0-9_.-]*@leetcode\.com$'
+);
+```
+
+
+
+
 
